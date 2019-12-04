@@ -112,6 +112,21 @@ function addCloud(cloudStartX,cloudStartY){
     }
 }
 
+function deleteClass(e){
+    e.target.classList = 'box';
+}
+
+function addingEventListeners(){
+    for (let i = 0; i<meshSize;i++){
+         for (let j = 0; j<meshSize;j++) {
+            arrOfRows[i].childNodes[j].addEventListener('click', deleteClass);
+         }
+    }
+}
+
+
+addingEventListeners()
+
 
 
 
