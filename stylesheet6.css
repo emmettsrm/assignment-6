@@ -1,10 +1,19 @@
 
+    #fullContainer{
+        display:flex;
+        flex-direction: row;
 
+    }
     #container{
         display:flex;
         flex-direction: column;
         height: 80vh;
         background-color:#87CEEB;
+        flex-grow:2;
+    }
+    #sideBar{
+        display: flex;
+        flex-grow: 1;
     }
     .row{
         display: flex;
