@@ -1,0 +1,50 @@
+
+
+    #container{
+        display:flex;
+        flex-direction: column;
+        height: 80vh;
+        background-color:#87CEEB;
+    }
+    .row{
+        display: flex;
+        width: 100%;
+        flex-grow:1;
+    }
+    .box{
+        flex-grow:1;
+    }
+    .dirt{
+        background-image: url('https://i.pinimg.com/originals/b1/27/c5/b127c5d9bc1cfd6e9d8bec70fb7040f0.jpg');
+        background-position:center;
+        background-size:cover;
+    }
+    .grass{
+        background-image: url('https://i.pinimg.com/originals/27/bb/f7/27bbf79998317ed46ebab78e8d936172.png');
+        background-position:top;
+        background-size:cover;
+    }
+    .stone{
+        background-image: url('https://i.pinimg.com/474x/67/cc/6b/67cc6bf351ae2979e2d87315a763acfd.jpg');
+        background-position:center;
+        background-size:cover;
+    }
+    .bark{
+        background-image: url('https://i.pinimg.com/474x/be/97/7a/be977af618e7d4fede2cbd7ccc8975dc--minecraft-blocks-minecraft-room.jpg');
+        background-position:center;
+        background-size:cover;
+    }
+    .leaves{
+        background-image: url('https://t5.rbxcdn.com/28c59a9f3d9ba0362d0b380034788068');
+        background-position:center;
+        background-size:cover;
+    }
+    .cloud{
+        background-color: white;
+        background-size:cover;
+    }
+
+
+
+
+
