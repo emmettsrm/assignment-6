@@ -1,6 +1,3 @@
-
-
-//var MineCraft = {}
 const meshSize = 20;
 function createFullContainer() {
     var fullContainer = document.createElement('div');
@@ -8,14 +5,14 @@ function createFullContainer() {
     document.body.append(fullContainer);
 }
 function rowContainerCreator() {
-    var container = document.createElement('div');
-    container.setAttribute("id","container");
-    document.getElementById("fullContainer").append(container)
+    var gameBoard = document.createElement('div');
+    gameBoard.setAttribute("id","gameBoard");
+    document.getElementById("fullContainer").append(gameBoard)
 }
 function rowCreator() {
     var row = document.createElement('div');
     row.setAttribute("class","row");
-    document.getElementById("container").append(row);
+    document.getElementById("gameBoard").append(row);
 }
 function boxCreator(){
     var box = document.createElement('div');
@@ -27,16 +24,17 @@ function boxCreator(){
 function createSideBar() {
     var sideBar = document.createElement('div');
     sideBar.setAttribute('id', 'sideBar');
-    var img1 = document.createElement('img');
-    img1.src = "https://www.researchgate.net/profile/Tim_Van_Leeuwerden/publication/292976043/figure/fig2/AS:325350820204547@1454581088304/A-Minecraft-Axe-obtained-in-the-first-minutes-of-the-game.png";
-    sideBar.append(img1);
-    var img2 = document.createElement('img');
-    img2.src = "https://icon-library.net/images/minecraft-pickaxe-icon/minecraft-pickaxe-icon-4.jpg";
-    sideBar.append(img2);
-    var img3 = document.createElement('img');
-    img3.src = "https://i.pinimg.com/originals/fc/75/ea/fc75eaf24453279cd9453200392c1cfa.png";
-    sideBar.append(img3);
-    document.getElementById('fullContainer').append(sideBar);
+    document.getElementById("fullContainer").append(sideBar);
+}
+function createButtons() {
+    var sideBar = document.getElementById('sideBar');
+    let tools = ["pickaxe", "shovel", "axe"];
+        for (let i=0; i<tools.length; i++){
+            tool = document.createElement('div');
+            tool.classList.add('toolButton');
+            tool.setAttribute('id', tools[i]);
+            sideBar.append(tool);
+        }
 }
 
 let arrOfRows = document.getElementsByClassName('row');
@@ -52,10 +50,12 @@ function matrixCreator(){
             arrOfRows[j].append(boxCreator())
         }
     }
+    createSideBar();
 }
 
 matrixCreator()
-
+addGround();
+createButtons();
 
 function addGround(){
     let numOfDirtRows = 6;
@@ -68,7 +68,7 @@ function addGround(){
         arrOfRows[meshSize-numOfDirtRows-1].childNodes[j].classList.add('grass')
     }
 }
-addGround()
+
 
 function addTree(treeCenter,trunkHeight){
     for (let i=0;i<trunkHeight;i++){

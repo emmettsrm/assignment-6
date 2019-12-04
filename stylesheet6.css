@@ -1,29 +1,49 @@
-
-<<<<<<< HEAD
     body {
-        margin:0px;
-=======
+        margin: 0;
+    }
     #fullContainer{
         display:flex;
         flex-direction: row;
 
->>>>>>> 341284b1ebc0c1e2018dda8e2ed84481d1218411
     }
-    #container{
+    #gameBoard{
         display:flex;
         flex-direction: column;
-        height: 80vh;
+        height: 100vh;
         background-color:#87CEEB;
-<<<<<<< HEAD
-        
-=======
-        flex-grow:2;
+        width: 85vw;
     }
     #sideBar{
         display: flex;
-        flex-grow: 1;
->>>>>>> 341284b1ebc0c1e2018dda8e2ed84481d1218411
+        flex-direction: column;
+        justify-items: center;
+        align-items: center;
+        width: 15vw;
+        height: 100vh;
+        background-color: rgba(0,0,0,0.7);
     }
+    .toolButton {
+        border: 1px white solid;
+        height: 70px;
+        width: 70px;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        margin: 10px;
+    }
+    
+    #pickaxe {
+        background-image: url('https://icon-library.net/images/minecraft-pickaxe-icon/minecraft-pickaxe-icon-4.jpg');
+    }
+
+    #shovel {
+        background-image: url('https://i.pinimg.com/originals/fc/75/ea/fc75eaf24453279cd9453200392c1cfa.png');
+    }
+
+    #axe {
+        background-image: url('https://theminecraftdictionary.files.wordpress.com/2014/06/minecraft-axe.png?w=538&zoom=2');
+    }
+
     .row{
         display: flex;
         width: 100%;
