@@ -1,13 +1,28 @@
 
+<<<<<<< HEAD
     body {
         margin:0px;
+=======
+    #fullContainer{
+        display:flex;
+        flex-direction: row;
+
+>>>>>>> 341284b1ebc0c1e2018dda8e2ed84481d1218411
     }
     #container{
         display:flex;
         flex-direction: column;
         height: 80vh;
         background-color:#87CEEB;
+<<<<<<< HEAD
         
+=======
+        flex-grow:2;
+    }
+    #sideBar{
+        display: flex;
+        flex-grow: 1;
+>>>>>>> 341284b1ebc0c1e2018dda8e2ed84481d1218411
     }
     .row{
         display: flex;
