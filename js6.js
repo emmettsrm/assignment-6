@@ -258,6 +258,15 @@ function addingEventListenersToTools(){
             el.target.classList.add("selectedTool");
             isAToolSelected = true;
             }
+        else if ((isAToolSelected) && (el.target.classList.length == 1)){
+            for (let j=0;j<toolArray.length; j++){
+                if (toolArray[j].id == currentlySelectedTool) {
+                    toolArray[j].classList = "toolButton"
+                }
+            };
+            currentlySelectedTool = el.target.id;
+            el.target.classList.add("selectedTool");
+        }
         else if ((isAToolSelected) && (el.target.classList.length == 2)){
             currentlySelectedTool = "";
             el.target.classList = "toolButton";
