@@ -4,10 +4,38 @@ function createFullContainer() {
     fullContainer.setAttribute('id', 'fullContainer');
     document.body.append(fullContainer);
 }
+
+function tutorialCreator() {
+    var tutorial = document.createElement('div');
+    tutorial.setAttribute("id","tutorial");
+    document.getElementById("fullContainer").append(tutorial);
+
+    var title = document.createElement('div');
+    title.setAttribute("id", "title");
+    document.getElementById("tutorial").append(title);
+
+    let tutorialTextbox = document.createElement('div');
+    tutorialTextbox.setAttribute("id", "tutorialText");
+    document.getElementById("tutorial").append(tutorialTextbox);
+
+    var tutorialBullets = ["USE THE PICKAXE TO REMOVE ROCKS.", "USE THE SHOVEL TO REMOVE DIRT AND GRASS.", "USE THE AXE TO REMOVE TREES AND BUSHES.", "USE THE REMOVED ITEMS STORED IN YOUR INVENTORY TO REINVENT THE WORLD."];
+    for (let i=0; i<tutorialBullets.length; i++){
+        var li = document.createElement('li');
+        li.innerHTML = tutorialBullets[i];
+        document.getElementById("tutorialText").append(li);
+    };
+
+    let startButton = document.createElement('button');
+    startButton.setAttribute("id", "startButton");
+    startButton.innerText = "START GAME";
+    document.getElementById("tutorial").append(startButton);
+    startButton.addEventListener('click', startGame);
+};
+
 function rowContainerCreator() {
     var gameBoard = document.createElement('div');
     gameBoard.setAttribute("id","gameBoard");
-    document.getElementById("fullContainer").append(gameBoard)
+    document.getElementById("fullContainer").append(gameBoard);
 }
 function rowCreator() {
     var row = document.createElement('div');
@@ -21,6 +49,8 @@ function boxCreator(){
 
 }
 
+
+
 function createSideBar() {
     var sideBar = document.createElement('div');
     sideBar.setAttribute('id', 'sideBar');
@@ -33,6 +63,7 @@ function createButtons() {
             tool = document.createElement('div');
             tool.classList.add('toolButton');
             tool.setAttribute('id', tools[i]);
+            tool.innerHTML = (tools[i].toUpperCase());
             sideBar.append(tool);
         }
 }
@@ -41,7 +72,8 @@ let arrOfRows = document.getElementsByClassName('row');
 
 function matrixCreator(){
     createFullContainer()
-    rowContainerCreator()
+    tutorialCreator();
+    rowContainerCreator();
     for (let i = 0; i<meshSize;i++){
         rowCreator();
     }
@@ -53,9 +85,7 @@ function matrixCreator(){
     createSideBar();
 }
 
-matrixCreator()
-addGround();
-createButtons();
+
 
 function addGround(){
     let numOfDirtRows = 6;
@@ -67,7 +97,7 @@ function addGround(){
     for (let j=0;j<meshSize;j++){
         arrOfRows[meshSize-numOfDirtRows-1].childNodes[j].classList.add('grass')
     }
-}
+};
 
 
 function addTree(treeCenter,trunkHeight){
@@ -122,14 +152,25 @@ function addingEventListeners(){
             arrOfRows[i].childNodes[j].addEventListener('click', deleteClass);
          }
     }
+
 }
 
+//sets side menu and div for matrix
+matrixCreator();
+createButtons();
 
-addingEventListeners()
+//starts game on button click; adds gameboard and structures
+function startGame() {
+    let gameBoard = document.getElementById('gameBoard');
+    let tutorial = document.getElementById('tutorial');
+    gameBoard.style.display = "block";
+    tutorial.style.display = "none";
+    addGround();
+    addTree(15, 4);
+    addBush(3);
+    addStones(7);
+    addCloud(5, 2);
+    addingEventListeners();
 
-
-
-
-
-
+}
 
