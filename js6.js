@@ -39,6 +39,7 @@ function rowContainerCreator() {
     gameBoard.setAttribute("id","gameBoard");
     document.getElementById("fullContainer").append(gameBoard);
 }
+
 function rowCreator() {
     var row = document.createElement('div');
     row.setAttribute("class","row");
@@ -61,28 +62,35 @@ function createSideBar() {
 function createButtons() {
     var sideBar = document.getElementById('sideBar');
     let tools = ["pickaxe", "shovel", "axe"];
-        for (let i=0; i<tools.length; i++){
-            tool = document.createElement('div');
-            tool.classList.add('toolButton');
-            tool.setAttribute('id', tools[i]);
-            tool.innerHTML = (tools[i].toUpperCase());
-            sideBar.append(tool);
-        }
+    for (let i=0; i<tools.length; i++){
+        tool = document.createElement('div');
+        tool.classList.add('toolButton');
+        tool.setAttribute('id', tools[i]);
+        tool.innerHTML = (tools[i].toUpperCase());
+        sideBar.append(tool);
+    }
 }
 
-//
-let arrOfRows = document.getElementsByClassName('row');
 
 function matrixCreator(){
-    createFullContainer()
+    createFullContainer();
     tutorialCreator();
     rowContainerCreator();
     for (let i = 0; i<meshSize;i++){
-        rowCreator();
+        var row = document.createElement('div');
+        row.setAttribute("class","row");
+        row.setAttribute("row",i)
+        document.getElementById("gameBoard").append(row);
+//        rowCreator();
     }
-    for (let j=0;j<arrOfRows.length;j++){
+    let arrOfRows = document.getElementsByClassName('row');
+    for (let j=0;j<meshSize;j++){
         for (let k=0;k<meshSize;k++){
-            arrOfRows[j].append(boxCreator())
+            var box = document.createElement('div');
+            box.setAttribute("class","box");
+            box.setAttribute('col',k);
+            box.setAttribute('row',j);
+            arrOfRows[j].append(box);
         }
     }
     createSideBar();
@@ -90,6 +98,9 @@ function matrixCreator(){
 
 
 const groundHeight = Math.floor(Math.random() * (9 - 4 + 1)) + 4; 
+
+let arrOfRows = document.getElementsByClassName('row');
+
 
 function addGround(){
     let numOfDirtRows = groundHeight;
@@ -186,17 +197,76 @@ function addCloud(cloudStartX,cloudStartY){
     }
 }
 
-function deleteClass(e){
-    e.target.classList = 'box';
+const inventory = {
+    ground: 0,
+    tree: 0,
+    stone: 0,
 }
 
-function addingEventListeners(){
+
+
+function deleteClass(e){
+    let targetRow = parseInt(e.target.getAttribute('row'));
+    let targetCol = parseInt(e.target.getAttribute('col'));
+    let check = ""
+    if (targetRow > 0){
+        check += "(arrOfRows[targetRow - 1].childNodes[targetCol].classList.length == 1)"
+    };
+
+    if (targetCol > 0){
+        if (check.length > 0) {
+            check += " || (arrOfRows[targetRow].childNodes[targetCol - 1].classList.length == 1)"
+        }
+        else {check += "(arrOfRows[targetRow].childNodes[targetCol - 1].classList.length == 1)"}
+    };
+    if (targetCol < meshSize - 1){
+        if (check.length > 0) {
+            check += " || (arrOfRows[targetRow].childNodes[targetCol + 1].classList.length == 1)"
+        }
+        else {check += "(arrOfRows[targetRow].childNodes[targetCol + 1].classList.length == 1)"}
+    };
+    if (eval(check)){
+        if ((currentlySelectedTool == "shovel")&&((e.target.classList[1] == 'dirt')||(e.target.classList[1] == 'grass'))){
+            inventory.ground += 1;
+            e.target.classList = 'box';
+        }
+        else if ((currentlySelectedTool == "pickaxe")&&(e.target.classList[1] == 'stone')){
+            inventory.stone += 1;
+            e.target.classList = 'box';
+        }
+        else if ((currentlySelectedTool == "axe")&&((e.target.classList[1] == 'bark')||(e.target.classList[1] == 'leaves'))){
+            inventory.tree += 1;
+            e.target.classList = 'box';
+        }
+    }
+}
+
+function addingEventListenersToGame(){
     for (let i = 0; i<meshSize;i++){
          for (let j = 0; j<meshSize;j++) {
             arrOfRows[i].childNodes[j].addEventListener('click', deleteClass);
          }
     }
+};
 
+let currentlySelectedTool = "";
+
+function addingEventListenersToTools(){
+    let isAToolSelected = false;
+    let toolArray = document.getElementById("sideBar").childNodes;
+    for (let i=0; i<toolArray.length; i++){
+        toolArray[i].addEventListener('click', function(el){
+        if (!isAToolSelected){
+            currentlySelectedTool = el.target.id;
+            el.target.classList.add("selectedTool");
+            console.log(el.target.classList);
+            isAToolSelected = true;
+            }
+        else if ((isAToolSelected) && (el.target.classList.length == 2)){
+            currentlySelectedTool = "";
+            el.target.classList = "toolButton";
+            isAToolSelected = false}
+        })};
 }
 
 //sets side menu and div for matrix
@@ -216,6 +286,7 @@ function startGame() {
     addCloud(cloudStartX, cloudStartY);
     addingEventListeners();
 }
+
 
 function addToolSelectors() {
     let pickaxe = document.getElementById("pickaxe");
