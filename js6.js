@@ -70,6 +70,17 @@ function createButtons() {
         sideBar.append(tool);
     }
 }
+function createInventory() {
+    var sideBar = document.getElementById('sideBar');
+    let items = ["topground", "ground", "leaves", "bark", "stone"];
+    for (let i=0; i<items.length; i++){
+        invBox = document.createElement('div');
+        invBox.classList.add('invButton');
+        invBox.setAttribute('id', items[i]);
+        // invBox.innerHTML = (inventory[i].toUpperCase());
+        sideBar.append(invBox);
+    }
+}
 
 
 function matrixCreator(){
@@ -94,6 +105,8 @@ function matrixCreator(){
         }
     }
     createSideBar();
+    createButtons();
+    createInventory();
 }
 
 
@@ -209,7 +222,6 @@ function deleteClass(e){
     if (targetRow > 0){
         check += "(arrOfRows[targetRow - 1].childNodes[targetCol].classList.length == 1)"
     };
-
     if (targetCol > 0){
         if (check.length > 0) {
             check += " || (arrOfRows[targetRow].childNodes[targetCol - 1].classList.length == 1)"
@@ -267,7 +279,7 @@ function addingEventListenersToTools(){
 
 //sets side menu and div for matrix
 matrixCreator();
-createButtons();
+// createButtons();
 
 //starts game on button click; adds gameboard and structures
 function startGame() {
@@ -283,23 +295,4 @@ function startGame() {
     addingEventListenersToGame();
     addingEventListenersToTools();
 }
-
-
-//function addToolSelectors() {
-//    let pickaxe = document.getElementById("pickaxe");
-//    pickaxe.addEventListener("click", function(){
-//        pickaxe.classList.toggle("active");
-//    })
-//    let axe = document.getElementById("axe");
-//    axe.addEventListener("click", function(){
-//        axe.classList.toggle("active");
-//    })
-//    let shovel = document.getElementById("shovel");
-//    shovel.addEventListener("click", function(){
-//        shovel.classList.toggle("active");
-//    })
-//
-//};
-
-//addToolSelectors();
 

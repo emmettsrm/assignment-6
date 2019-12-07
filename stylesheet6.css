@@ -113,6 +113,13 @@
         background-color: blue;
     }
 
+    .invButton {
+        height: 40px;
+        width: 40px;
+        border: 1px white solid;
+        margin-top: 5%;
+    }
+
     .row{
         display: flex;
         width: 100%;
