@@ -136,9 +136,7 @@ function addTree(treeCenter,trunkHeight){
 let bushStart;
 function randomizeBush(){
    bushStart = Math.floor(Math.random() * (17 - 1 + 1)) + 1;
-   console.log(bushStart);
    if (bushStart <= (treeCenter + 2) && bushStart >= (treeCenter - 2)){
-       console.log("bush stopped");
         randomizeBush();
     }else  {
         return bushStart;
@@ -159,7 +157,6 @@ let stoneStart;
 function randomizeStone(){
    stoneStart = Math.floor(Math.random() * (17 - 1 + 1)) + 1;
    if (stoneStart <= (treeCenter + 2)  && stoneStart >= (treeCenter - 2) || (stoneStart >= (bushStart -2) && stoneStart <= (bushStart + 2))){
-       console.log("stone stopped");
         randomizeStone();
     }else  {
         return stoneStart;
@@ -259,7 +256,6 @@ function addingEventListenersToTools(){
         if (!isAToolSelected){
             currentlySelectedTool = el.target.id;
             el.target.classList.add("selectedTool");
-            console.log(el.target.classList);
             isAToolSelected = true;
             }
         else if ((isAToolSelected) && (el.target.classList.length == 2)){
@@ -284,25 +280,26 @@ function startGame() {
     addBush(bushStart);
     addStones(stoneStart);
     addCloud(cloudStartX, cloudStartY);
-    addingEventListeners();
+    addingEventListenersToGame();
+    addingEventListenersToTools();
 }
 
 
-function addToolSelectors() {
-    let pickaxe = document.getElementById("pickaxe");
-    pickaxe.addEventListener("click", function(){
-        pickaxe.classList.toggle("active");
-    })
-    let axe = document.getElementById("axe");
-    axe.addEventListener("click", function(){
-        axe.classList.toggle("active");
-    })
-    let shovel = document.getElementById("shovel");
-    shovel.addEventListener("click", function(){
-        shovel.classList.toggle("active");
-    })
+//function addToolSelectors() {
+//    let pickaxe = document.getElementById("pickaxe");
+//    pickaxe.addEventListener("click", function(){
+//        pickaxe.classList.toggle("active");
+//    })
+//    let axe = document.getElementById("axe");
+//    axe.addEventListener("click", function(){
+//        axe.classList.toggle("active");
+//    })
+//    let shovel = document.getElementById("shovel");
+//    shovel.addEventListener("click", function(){
+//        shovel.classList.toggle("active");
+//    })
+//
+//};
 
-};
-
-addToolSelectors();
+//addToolSelectors();
 
