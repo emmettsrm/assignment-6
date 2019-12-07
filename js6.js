@@ -12,17 +12,17 @@ function rowContainerCreator() {
     container.setAttribute("id","container");
     document.getElementById("fullContainer").append(container)
 }
-function rowCreator() {
-    var row = document.createElement('div');
-    row.setAttribute("class","row");
-    document.getElementById("container").append(row);
-}
-function boxCreator(){
-    var box = document.createElement('div');
-    box.setAttribute("class","box");
-    return box
-
-}
+//function rowCreator() {
+//    var row = document.createElement('div');
+//    row.setAttribute("class","row");
+//    document.getElementById("container").append(row);
+//}
+//function boxCreator(){
+//    var box = document.createElement('div');
+//    box.setAttribute("class","box");
+//    return box
+//
+//}
 
 function createSideBar() {
     var sideBar = document.createElement('div');
@@ -39,22 +39,31 @@ function createSideBar() {
     document.getElementById('fullContainer').append(sideBar);
 }
 
-let arrOfRows = document.getElementsByClassName('row');
 
 function matrixCreator(){
     createFullContainer()
     rowContainerCreator()
     for (let i = 0; i<meshSize;i++){
-        rowCreator();
+        var row = document.createElement('div');
+        row.setAttribute("class","row");
+        row.setAttribute("row",i)
+        document.getElementById("container").append(row);
+//        rowCreator();
     }
-    for (let j=0;j<arrOfRows.length;j++){
+    let arrOfRows = document.getElementsByClassName('row');
+    for (let j=0;j<meshSize;j++){
         for (let k=0;k<meshSize;k++){
-            arrOfRows[j].append(boxCreator())
+            var box = document.createElement('div');
+            box.setAttribute("class","box");
+            box.setAttribute('col',k);
+            box.setAttribute('row',j);
+            arrOfRows[j].append(box)
         }
     }
 }
 
 matrixCreator()
+let arrOfRows = document.getElementsByClassName('row');
 
 
 function addGround(){
@@ -112,8 +121,46 @@ function addCloud(cloudStartX,cloudStartY){
     }
 }
 
+const inventory = {
+    ground: 0,
+    tree: 0,
+    stone: 0,
+}
+
+
+
 function deleteClass(e){
-    e.target.classList = 'box';
+    let targetRow = parseInt(e.target.getAttribute('row'));
+    let targetCol = parseInt(e.target.getAttribute('col'));
+    let check = ""
+    if (targetRow > 0){
+        check += "(arrOfRows[targetRow - 1].childNodes[targetCol].classList.length == 1)"
+    }
+
+    if (targetCol > 0){
+        if (check.length > 0) {
+            check += " || (arrOfRows[targetRow].childNodes[targetCol - 1].classList.length == 1)"
+        }
+        else {check += "(arrOfRows[targetRow].childNodes[targetCol - 1].classList.length == 1)"}
+    }
+    if (targetCol < meshSize - 1){
+        if (check.length > 0) {
+            check += " || (arrOfRows[targetRow].childNodes[targetCol + 1].classList.length == 1)"
+        }
+        else {check += "(arrOfRows[targetRow].childNodes[targetCol + 1].classList.length == 1)"}
+    }
+    if (eval(check)){
+        if ((e.target.classList[1] == 'dirt')||(e.target.classList[1] == 'grass')){
+            inventory.ground += 1;
+        }
+        else if (e.target.classList[1] == 'stone'){
+            inventory.stone += 1;
+        }
+        else if ((e.target.classList[1] == 'bark')||(e.target.classList[1] == 'leaves')){
+            inventory.tree += 1;
+        }
+        e.target.classList = 'box';
+    }
 }
 
 function addingEventListeners(){
@@ -123,6 +170,8 @@ function addingEventListeners(){
          }
     }
 }
+
+
 
 
 addingEventListeners()
