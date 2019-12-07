@@ -116,6 +116,7 @@
     }
     .box{
         flex-grow:1;
+        border: 1px black solid;
     }
     .box:hover {
         opacity: 70%;
