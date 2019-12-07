@@ -73,17 +73,18 @@
     @-webkit-keyframes fill {
         from { -webkit-text-fill-color: white; }
         to { -webkit-text-fill-color: darkgrey; }
-      }
+    }
+    button:focus {outline:0;}
     
 
     #sideBar{
         display: flex;
         flex-direction: column;
-        justify-items: center;
         align-items: center;
         width: 20vw;
         height: 100vh;
         background-color: rgba(0,0,0,0.7);
+        justify-content: space-evenly;
     }
     .toolButton {
         border: 1px white solid;
@@ -99,7 +100,17 @@
         justify-content: flex-end;
         padding-top: 59px;
         padding-right: 2px;
-        
+    }
+    .invButton {
+        height: 50px;
+        width: 50px;
+        border: 1px white solid;
+        margin-top: 3%;
+        color: white;
+        font-size: larger;
+        box-sizing: border-box;
+        padding-left: 7%;
+        padding-top: 4%;
     }
     
     #pickaxe {
@@ -114,25 +125,11 @@
         background-image: url('https://theminecraftdictionary.files.wordpress.com/2014/06/minecraft-axe.png?w=538&zoom=2');
     }
 
-
-
     .selectedTool{
         border: 2px solid blue;
         background-color: blue;
     }
 
-    .invButton {
-        height: 50px;
-        width: 50px;
-        border: 1px white solid;
-        margin-top: 3%;
-        color: white;
-        font-size: larger;
-        box-sizing: border-box;
-        padding-left: 7%;
-        padding-top: 4%;
-    }
-    
     .row{
         display: flex;
         width: 100%;
@@ -175,9 +172,9 @@
         background-size:cover;
     }
 
-    .active {
+    /* .active {
         background-color: blue;
-    }
+    } */
 
 
 

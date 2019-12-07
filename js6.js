@@ -222,8 +222,37 @@ function addCloud(cloudStartX,cloudStartY){
     }
 }
 
+let currentlySelectedTool = "";
+let toolArray = document.getElementsByClassName("toolButton");
+
+function addingEventListenersToTools(){
+    let isAToolSelected = false;
+    for (let i=0; i<toolArray.length; i++){
+        toolArray[i].addEventListener('click', function(el){
+        if (!isAToolSelected){
+            currentlySelectedTool = el.target.id;
+            el.target.classList.add("selectedTool");
+            isAToolSelected = true;
+            }
+        else if ((isAToolSelected) && (el.target.classList.length == 1)){
+            for (let j=0;j<toolArray.length; j++){
+                if (toolArray[j].id == currentlySelectedTool) {
+                    toolArray[j].classList = "toolButton"
+                }
+            };
+            currentlySelectedTool = el.target.id;
+            el.target.classList.add("selectedTool");
+        }
+        else if ((isAToolSelected) && (el.target.classList.length == 2)){
+            currentlySelectedTool = "";
+            el.target.classList = "toolButton";
+            isAToolSelected = false}
+        })};
+}
+
 /////function for removal of blocks based on selected tool
 function deleteClass(e){
+    
     let targetRow = parseInt(e.target.getAttribute('row'));
     let targetCol = parseInt(e.target.getAttribute('col'));
     let check = ""
@@ -354,33 +383,7 @@ function addingEventListenersToGame(){
     }
 };
 
-let currentlySelectedTool = "";
-let toolArray = document.getElementsByClassName("toolButton");
 
-function addingEventListenersToTools(){
-    let isAToolSelected = false;
-    for (let i=0; i<toolArray.length; i++){
-        toolArray[i].addEventListener('click', function(el){
-        if (!isAToolSelected){
-            currentlySelectedTool = el.target.id;
-            el.target.classList.add("selectedTool");
-            isAToolSelected = true;
-            }
-        else if ((isAToolSelected) && (el.target.classList.length == 1)){
-            for (let j=0;j<toolArray.length; j++){
-                if (toolArray[j].id == currentlySelectedTool) {
-                    toolArray[j].classList = "toolButton"
-                }
-            };
-            currentlySelectedTool = el.target.id;
-            el.target.classList.add("selectedTool");
-        }
-        else if ((isAToolSelected) && (el.target.classList.length == 2)){
-            currentlySelectedTool = "";
-            el.target.classList = "toolButton";
-            isAToolSelected = false}
-        })};
-}
 
 //sets side menu and div for matrix
 matrixCreator();
