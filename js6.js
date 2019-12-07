@@ -52,6 +52,7 @@ function boxCreator(){
 
 }
 
+//creates sidebar
 function createSideBar() {
     var sideBar = document.createElement('div');
     sideBar.setAttribute('id', 'sideBar');
@@ -72,6 +73,7 @@ function createButtons() {
     }
 }
 
+//running item inventory
 const inventory = {
     dirt: 0,
     grass: 0,
@@ -80,6 +82,7 @@ const inventory = {
     stone: 0,
 }
 
+//creates inventory buttons in sidebar
 function createInventory() {
     var sideBar = document.getElementById('sideBar');
     let invTitle = document.createElement('h1');
@@ -94,7 +97,7 @@ function createInventory() {
     }
 }
 
-
+//initializes landing page
 function matrixCreator(){
     createFullContainer();
     tutorialCreator();
@@ -104,7 +107,6 @@ function matrixCreator(){
         row.setAttribute("class","row");
         row.setAttribute("row",i)
         document.getElementById("gameBoard").append(row);
-//        rowCreator();
     }
     let arrOfRows = document.getElementsByClassName('row');
     for (let j=0;j<meshSize;j++){
@@ -122,10 +124,10 @@ function matrixCreator(){
 }
 
 
+/////////////randomizes and creates world
 const groundHeight = Math.floor(Math.random() * (9 - 4 + 1)) + 4; 
 
 let arrOfRows = document.getElementsByClassName('row');
-
 
 function addGround(){
     let numOfDirtRows = groundHeight;
@@ -219,6 +221,7 @@ function addCloud(cloudStartX,cloudStartY){
     }
 }
 
+/////function for removal of blocks based on selected tool
 function deleteClass(e){
     let targetRow = parseInt(e.target.getAttribute('row'));
     let targetCol = parseInt(e.target.getAttribute('col'));
@@ -273,6 +276,7 @@ function deleteClass(e){
     }
 }
 
+////adds clickability to removable game squares
 function addingEventListenersToGame(){
     for (let i = 0; i<meshSize;i++){
          for (let j = 0; j<meshSize;j++) {
@@ -326,5 +330,5 @@ function startGame() {
     addCloud(cloudStartX, cloudStartY);
     addingEventListenersToGame();
     addingEventListenersToTools();
+    invOpacity();
 }
-
