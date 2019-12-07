@@ -108,6 +108,11 @@
         background-image: url('https://theminecraftdictionary.files.wordpress.com/2014/06/minecraft-axe.png?w=538&zoom=2');
     }
 
+    .selectedTool{
+        border: 2px solid blue;
+        background-color: blue;
+    }
+
     .row{
         display: flex;
         width: 100%;

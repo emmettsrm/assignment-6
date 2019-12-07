@@ -183,26 +183,48 @@ function deleteClass(e){
         else {check += "(arrOfRows[targetRow].childNodes[targetCol + 1].classList.length == 1)"}
     };
     if (eval(check)){
-        if ((e.target.classList[1] == 'dirt')||(e.target.classList[1] == 'grass')){
+        if ((currentlySelectedTool == "shovel")&&((e.target.classList[1] == 'dirt')||(e.target.classList[1] == 'grass'))){
             inventory.ground += 1;
+            e.target.classList = 'box';
         }
-        else if (e.target.classList[1] == 'stone'){
+        else if ((currentlySelectedTool == "pickaxe")&&(e.target.classList[1] == 'stone')){
             inventory.stone += 1;
+            e.target.classList = 'box';
         }
-        else if ((e.target.classList[1] == 'bark')||(e.target.classList[1] == 'leaves')){
+        else if ((currentlySelectedTool == "axe")&&((e.target.classList[1] == 'bark')||(e.target.classList[1] == 'leaves'))){
             inventory.tree += 1;
+            e.target.classList = 'box';
         }
-        e.target.classList = 'box';
     }
 }
 
-function addingEventListeners(){
+function addingEventListenersToGame(){
     for (let i = 0; i<meshSize;i++){
          for (let j = 0; j<meshSize;j++) {
             arrOfRows[i].childNodes[j].addEventListener('click', deleteClass);
          }
     }
 };
+
+let currentlySelectedTool = "";
+
+function addingEventListenersToTools(){
+    let isAToolSelected = false;
+    let toolArray = document.getElementById("sideBar").childNodes;
+    for (let i=0; i<toolArray.length; i++){
+        toolArray[i].addEventListener('click', function(el){
+        if (!isAToolSelected){
+            currentlySelectedTool = el.target.id;
+            el.target.classList.add("selectedTool");
+            console.log(el.target.classList);
+            isAToolSelected = true;
+            }
+        else if ((isAToolSelected) && (el.target.classList.length == 2)){
+            currentlySelectedTool = "";
+            el.target.classList = "toolButton";
+            isAToolSelected = false}
+        })};
+}
 
 //sets side menu and div for matrix
 matrixCreator();
@@ -219,7 +241,8 @@ function startGame() {
     addBush(3);
     addStones(7);
     addCloud(5, 2);
-    addingEventListeners();
+    addingEventListenersToGame();
+    addingEventListenersToTools();
 
 };
 
