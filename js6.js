@@ -52,8 +52,6 @@ function boxCreator(){
 
 }
 
-
-
 function createSideBar() {
     var sideBar = document.createElement('div');
     sideBar.setAttribute('id', 'sideBar');
@@ -61,6 +59,9 @@ function createSideBar() {
 }
 function createButtons() {
     var sideBar = document.getElementById('sideBar');
+    let toolsTitle = document.createElement('h1');
+    toolsTitle.innerText = "TOOLS";
+    sideBar.append(toolsTitle);
     let tools = ["pickaxe", "shovel", "axe"];
     for (let i=0; i<tools.length; i++){
         tool = document.createElement('div');
@@ -70,14 +71,25 @@ function createButtons() {
         sideBar.append(tool);
     }
 }
+
+const inventory = {
+    dirt: 0,
+    grass: 0,
+    leaves: 0,
+    bark: 0,
+    stone: 0,
+}
+
 function createInventory() {
     var sideBar = document.getElementById('sideBar');
-    let items = ["topground", "ground", "leaves", "bark", "stone"];
+    let invTitle = document.createElement('h1');
+    invTitle.innerText = "INVENTORY";
+    sideBar.append(invTitle);
+    let items = ["grass", "dirt", "leaves", "bark", "stone"];
     for (let i=0; i<items.length; i++){
         invBox = document.createElement('div');
-        invBox.classList.add('invButton');
-        invBox.setAttribute('id', items[i]);
-        // invBox.innerHTML = (inventory[i].toUpperCase());
+        invBox.classList.add('invButton', items[i]);
+        invBox.setAttribute('id', items[i]+"Inv")
         sideBar.append(invBox);
     }
 }
@@ -207,16 +219,6 @@ function addCloud(cloudStartX,cloudStartY){
     }
 }
 
-const inventory = {
-    dirt: 0,
-    grass: 0,
-    leaves: 0,
-    bark: 0,
-    stone: 0,
-}
-
-
-
 function deleteClass(e){
     let targetRow = parseInt(e.target.getAttribute('row'));
     let targetCol = parseInt(e.target.getAttribute('col'));
@@ -239,23 +241,33 @@ function deleteClass(e){
     if (eval(check)){
         if ((currentlySelectedTool == "shovel")&&(e.target.classList[1] == 'dirt')){
             inventory.dirt += 1;
+            let dirtInv = document.getElementById("dirtInv");
+            dirtInv.innerHTML = inventory.dirt;
             e.target.classList = 'box';
         }
         else if ((currentlySelectedTool == "shovel")&&(e.target.classList[1] == 'grass')){
             inventory.grass += 1;
+            let grassInv = document.getElementById("grassInv");
+            grassInv.innerHTML = inventory.grass;
             e.target.classList = 'box';
         }
 
         else if ((currentlySelectedTool == "pickaxe")&&(e.target.classList[1] == 'stone')){
             inventory.stone += 1;
+            let stoneInv = document.getElementById("stoneInv");
+            stoneInv.innerHTML = inventory.stone;
             e.target.classList = 'box';
         }
         else if ((currentlySelectedTool == "axe")&&(e.target.classList[1] == 'bark')){
             inventory.bark += 1;
+            let barkInv = document.getElementById("barkInv");
+            barkInv.innerHTML = inventory.bark;
             e.target.classList = 'box';
         }
         else if ((currentlySelectedTool == "axe")&&(e.target.classList[1] == 'leaves')){
             inventory.leaves += 1;
+            let leavesInv = document.getElementById("leavesInv");
+            leavesInv.innerHTML = inventory.leaves;
             e.target.classList = 'box';
         }
     }

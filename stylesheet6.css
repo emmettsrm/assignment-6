@@ -2,6 +2,12 @@
         margin: 0;
         font-family: 'Londrina Solid', cursive;
     }
+
+    h1 {
+        color: white;
+        margin-bottom: 3px;
+        margin-top: 8px;
+    }
     #fullContainer{
         display:flex;
         flex-direction: row;
@@ -108,18 +114,25 @@
         background-image: url('https://theminecraftdictionary.files.wordpress.com/2014/06/minecraft-axe.png?w=538&zoom=2');
     }
 
+
+
     .selectedTool{
         border: 2px solid blue;
         background-color: blue;
     }
 
     .invButton {
-        height: 40px;
-        width: 40px;
+        height: 50px;
+        width: 50px;
         border: 1px white solid;
-        margin-top: 5%;
+        margin-top: 3%;
+        color: white;
+        font-size: large;
+        box-sizing: border-box;
+        padding-left: 7%;
+        padding-top: 4%;
     }
-
+    
     .row{
         display: flex;
         width: 100%;
