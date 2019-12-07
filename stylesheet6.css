@@ -1,27 +1,124 @@
-
+    body {
+        margin: 0;
+        font-family: 'Londrina Solid', cursive;
+    }
     #fullContainer{
         display:flex;
         flex-direction: row;
-
     }
-    #container{
+    #gameBoard{
         display:flex;
         flex-direction: column;
-        height: 80vh;
+        height: 100vh;
         background-color:#87CEEB;
-        flex-grow:2;
+        width: 80vw;
+        display: none;
     }
+
+    #tutorial{
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-image: url("http://pre06.deviantart.net/250e/th/pre/i/2012/127/0/3/ipad_wallpaper_mc_dirt_by_xseanx123-d4ywq8d.png");
+        background-repeat: repeat;
+        width: 85vw;
+        color: white;
+        font-size: 40px;
+        z-index: 10;
+    }
+
+    #title {
+        height: 25%;
+        width: 60%;
+        display: block;
+        /* position: relative;
+        bottom: 10%; */
+        background-image: url("http://pluspng.com/img-png/minecraft-logo-png-1782.png");
+        background-size: contain;
+        background-color: transparent;
+        background-repeat: no-repeat;
+
+    }
+
+    #tutorialText {
+        display: block;
+        list-style-image: url('./images/bulleticon.png');
+        letter-spacing: 0.05em;
+        max-width: 70%;
+        text-align: center;
+    }
+    
+    #startButton {
+        font-size: 70px;
+        margin-top: 4%;
+        background-color: transparent;
+        font-family: 'Londrina Solid', cursive;
+        color: white;
+        border: none;
+        margin-bottom: 5%;
+        -webkit-text-stroke: 1px black;
+        -webkit-text-fill-color: white;
+        -webkit-animation: fill 0.8s infinite alternate;
+
+    }
+      
+    @-webkit-keyframes fill {
+        from { -webkit-text-fill-color: white; }
+        to { -webkit-text-fill-color: darkgrey; }
+      }
+    
+
     #sideBar{
         display: flex;
-        flex-grow: 1;
+        flex-direction: column;
+        justify-items: center;
+        align-items: center;
+        width: 20vw;
+        height: 100vh;
+        background-color: rgba(0,0,0,0.7);
     }
+    .toolButton {
+        border: 1px white solid;
+        height: 78px;
+        width: 70px;
+        box-sizing: border-box;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        margin: 10px;
+        color: white;
+        display: flex;
+        justify-content: flex-end;
+        padding-top: 59px;
+        padding-right: 2px;
+        
+    }
+    
+    #pickaxe {
+        background-image: url('https://icon-library.net/images/minecraft-pickaxe-icon/minecraft-pickaxe-icon-4.jpg');
+    }
+
+    #shovel {
+        background-image: url('https://i.pinimg.com/originals/fc/75/ea/fc75eaf24453279cd9453200392c1cfa.png');
+    }
+
+    #axe {
+        background-image: url('https://theminecraftdictionary.files.wordpress.com/2014/06/minecraft-axe.png?w=538&zoom=2');
+    }
+
     .row{
         display: flex;
         width: 100%;
+        height: 5%;
         flex-grow:1;
     }
     .box{
         flex-grow:1;
+    }
+    .box:hover {
+        opacity: 70%;
     }
     .dirt{
         background-image: url('https://i.pinimg.com/originals/b1/27/c5/b127c5d9bc1cfd6e9d8bec70fb7040f0.jpg');

@@ -1,48 +1,79 @@
-
-
-//var MineCraft = {}
 const meshSize = 20;
 function createFullContainer() {
     var fullContainer = document.createElement('div');
     fullContainer.setAttribute('id', 'fullContainer');
     document.body.append(fullContainer);
 }
+
+function tutorialCreator() {
+    var tutorial = document.createElement('div');
+    tutorial.setAttribute("id","tutorial");
+    document.getElementById("fullContainer").append(tutorial);
+
+    var title = document.createElement('div');
+    title.setAttribute("id", "title");
+    document.getElementById("tutorial").append(title);
+
+    let tutorialTextbox = document.createElement('div');
+    tutorialTextbox.setAttribute("id", "tutorialText");
+    document.getElementById("tutorial").append(tutorialTextbox);
+
+    var tutorialBullets = ["USE THE PICKAXE TO REMOVE ROCKS.", "USE THE SHOVEL TO REMOVE DIRT AND GRASS.", "USE THE AXE TO REMOVE TREES AND BUSHES.", "USE THE REMOVED ITEMS STORED IN YOUR INVENTORY TO REINVENT THE WORLD."];
+    for (let i=0; i<tutorialBullets.length; i++){
+        var li = document.createElement('li');
+        li.innerHTML = tutorialBullets[i];
+        document.getElementById("tutorialText").append(li);
+    };
+
+    let startButton = document.createElement('button');
+    startButton.setAttribute("id", "startButton");
+    startButton.innerText = "START GAME";
+    document.getElementById("tutorial").append(startButton);
+    startButton.addEventListener('click', startGame);
+};
+
 function rowContainerCreator() {
-    var container = document.createElement('div');
-    container.setAttribute("id","container");
-    document.getElementById("fullContainer").append(container)
+    var gameBoard = document.createElement('div');
+    gameBoard.setAttribute("id","gameBoard");
+    document.getElementById("fullContainer").append(gameBoard);
 }
-//function rowCreator() {
-//    var row = document.createElement('div');
-//    row.setAttribute("class","row");
-//    document.getElementById("container").append(row);
-//}
-//function boxCreator(){
-//    var box = document.createElement('div');
-//    box.setAttribute("class","box");
-//    return box
-//
-//}
+
+function rowCreator() {
+    var row = document.createElement('div');
+    row.setAttribute("class","row");
+    document.getElementById("gameBoard").append(row);
+}
+function boxCreator(){
+    var box = document.createElement('div');
+    box.setAttribute("class","box");
+    return box
+
+}
+
+
 
 function createSideBar() {
     var sideBar = document.createElement('div');
     sideBar.setAttribute('id', 'sideBar');
-    var img1 = document.createElement('img');
-    img1.src = "https://www.researchgate.net/profile/Tim_Van_Leeuwerden/publication/292976043/figure/fig2/AS:325350820204547@1454581088304/A-Minecraft-Axe-obtained-in-the-first-minutes-of-the-game.png";
-    sideBar.append(img1);
-    var img2 = document.createElement('img');
-    img2.src = "https://icon-library.net/images/minecraft-pickaxe-icon/minecraft-pickaxe-icon-4.jpg";
-    sideBar.append(img2);
-    var img3 = document.createElement('img');
-    img3.src = "https://i.pinimg.com/originals/fc/75/ea/fc75eaf24453279cd9453200392c1cfa.png";
-    sideBar.append(img3);
-    document.getElementById('fullContainer').append(sideBar);
+    document.getElementById("fullContainer").append(sideBar);
+}
+function createButtons() {
+    var sideBar = document.getElementById('sideBar');
+    let tools = ["pickaxe", "shovel", "axe"];
+        for (let i=0; i<tools.length; i++){
+            tool = document.createElement('div');
+            tool.classList.add('toolButton');
+            tool.setAttribute('id', tools[i]);
+            tool.innerHTML = (tools[i].toUpperCase());
+            sideBar.append(tool);
+        }
 }
 
 
 function matrixCreator(){
     createFullContainer()
-    rowContainerCreator()
+    tutorialCreator();
+    rowContainerCreator();
     for (let i = 0; i<meshSize;i++){
         var row = document.createElement('div');
         row.setAttribute("class","row");
@@ -60,9 +91,11 @@ function matrixCreator(){
             arrOfRows[j].append(box)
         }
     }
+    createSideBar();
 }
 
-matrixCreator()
+
+
 let arrOfRows = document.getElementsByClassName('row');
 
 
@@ -76,8 +109,8 @@ function addGround(){
     for (let j=0;j<meshSize;j++){
         arrOfRows[meshSize-numOfDirtRows-1].childNodes[j].classList.add('grass')
     }
-}
-addGround()
+};
+
 
 function addTree(treeCenter,trunkHeight){
     for (let i=0;i<trunkHeight;i++){
@@ -169,16 +202,23 @@ function addingEventListeners(){
             arrOfRows[i].childNodes[j].addEventListener('click', deleteClass);
          }
     }
+
+//sets side menu and div for matrix
+matrixCreator();
+createButtons();
+
+//starts game on button click; adds gameboard and structures
+function startGame() {
+    let gameBoard = document.getElementById('gameBoard');
+    let tutorial = document.getElementById('tutorial');
+    gameBoard.style.display = "block";
+    tutorial.style.display = "none";
+    addGround();
+    addTree(15, 4);
+    addBush(3);
+    addStones(7);
+    addCloud(5, 2);
+    addingEventListeners();
+
 }
-
-
-
-
-addingEventListeners()
-
-
-
-
-
-
 
