@@ -84,7 +84,9 @@
         width: 20vw;
         height: 100vh;
         background-color: rgba(0,0,0,0.7);
+
     }
+
     .toolButton {
         border: 1px white solid;
         height: 78px;
@@ -120,7 +122,10 @@
         border: 2px solid blue;
         background-color: blue;
     }
-
+    .red {
+        background-color: red;
+        border: 1px solid red;
+    }
     .invButton {
         height: 50px;
         width: 50px;

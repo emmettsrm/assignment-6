@@ -270,6 +270,13 @@ function deleteClass(e){
             let leavesInv = document.getElementById("leavesInv");
             leavesInv.innerHTML = inventory.leaves;
             e.target.classList = 'box';
+        } else {
+            for (let k=0;k<toolArray.length;k++){
+                if (toolArray[k].classList[1] == 'selectedTool'){
+                    toolArray[k].classList.add('red');
+                    setTimeout(function(){toolArray[k].classList.remove('red')},1000);
+                }
+            }
         }
     }
 }
