@@ -171,6 +171,23 @@ function startGame() {
     addStones(7);
     addCloud(5, 2);
     addingEventListeners();
-
 }
+
+function addToolSelectors() {
+    let pickaxe = document.getElementById("pickaxe");
+    pickaxe.addEventListener("click", function(){
+        pickaxe.classList.toggle("active");
+    })
+    let axe = document.getElementById("axe");
+    axe.addEventListener("click", function(){
+        axe.classList.toggle("active");
+    })
+    let shovel = document.getElementById("shovel");
+    shovel.addEventListener("click", function(){
+        shovel.classList.toggle("active");
+    })
+
+};
+
+addToolSelectors();
 

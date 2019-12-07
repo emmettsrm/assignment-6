@@ -150,6 +150,9 @@
         background-size:cover;
     }
 
+    .active {
+        background-color: blue;
+    }
 
 
 
