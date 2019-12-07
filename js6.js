@@ -151,13 +151,13 @@ function addTree(treeCenter,trunkHeight){
     }
     let leavesHeight = 5;
     for (let i=0;i<leavesHeight;i++){
-        arrOfRows[meshSize-groundHeight-trunkHeight-1-i].childNodes[treeCenter].classList.add('leaves');
+        arrOfRows[meshSize-groundHeight-trunkHeight-2-i].childNodes[treeCenter].classList.add('leaves');
     }
     for (let i=0;i<leavesHeight-1;i++){
-        arrOfRows[meshSize-groundHeight-trunkHeight-1-i].childNodes[treeCenter-1].classList.add('leaves');
+        arrOfRows[meshSize-groundHeight-trunkHeight-2-i].childNodes[treeCenter-1].classList.add('leaves');
     }
     for (let i=0;i<leavesHeight-1;i++){
-        arrOfRows[meshSize-groundHeight-trunkHeight-1-i].childNodes[treeCenter+1].classList.add('leaves');
+        arrOfRows[meshSize-groundHeight-trunkHeight-2-i].childNodes[treeCenter+1].classList.add('leaves');
     }
 }
 
@@ -384,7 +384,6 @@ function addingEventListenersToTools(){
 
 //sets side menu and div for matrix
 matrixCreator();
-// createButtons();
 
 //starts game on button click; adds gameboard and structures
 function startGame() {
