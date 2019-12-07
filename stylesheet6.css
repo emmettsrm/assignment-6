@@ -86,6 +86,7 @@
         background-color: rgba(0,0,0,0.7);
         justify-content: space-evenly;
     }
+
     .toolButton {
         border: 1px white solid;
         height: 78px;
@@ -129,7 +130,22 @@
         border: 2px solid blue;
         background-color: blue;
     }
-
+    .red {
+        background-color: red;
+        border: 1px solid red;
+    }
+    .invButton {
+        height: 50px;
+        width: 50px;
+        border: 1px white solid;
+        margin-top: 3%;
+        color: white;
+        font-size: larger;
+        box-sizing: border-box;
+        padding-left: 7%;
+        padding-top: 4%;
+    }
+    
     .row{
         display: flex;
         width: 100%;
@@ -172,9 +188,6 @@
         background-size:cover;
     }
 
-    /* .active {
-        background-color: blue;
-    } */
 
 
 
