@@ -93,6 +93,7 @@ function createInventory() {
         invBox = document.createElement('div');
         invBox.classList.add('invButton', items[i]);
         invBox.setAttribute('id', items[i]+"Inv")
+        invBox.innerHTML = 0;
         sideBar.append(invBox);
     }
 }
@@ -276,20 +277,88 @@ function deleteClass(e){
     }
 }
 
-////adds clickability to removable game squares
+let droppingClass = "";
+function addInventoryEventListeners(){
+    let arrOfInv = document.getElementsByClassName('invButton');
+    for (let i=0;i<arrOfInv.length;i++){
+        arrOfInv[i].addEventListener('click',function(el){
+            for (let j=0;j<toolArray.length;j++){
+                if (toolArray[j].classList.length == 2){
+                    toolArray[j].classList = "toolButton"
+                }
+            }
+            droppingClass = el.target.classList[1]
+            addingEventListenersToGame();
+        })
+    }
+}
+
+function isBelow(x,y) {
+    if (x < meshSize-1){
+        if (arrOfRows[x + 1].childNodes[y].classList.length == 2){
+            return true
+        }
+    } else if (x == meshSize-1){
+        return true
+    } else {return false}
+}
+
 function addingEventListenersToGame(){
     for (let i = 0; i<meshSize;i++){
          for (let j = 0; j<meshSize;j++) {
-            arrOfRows[i].childNodes[j].addEventListener('click', deleteClass);
+            if (arrOfRows[i].childNodes[j].classList.length == 2){
+                arrOfRows[i].childNodes[j].addEventListener('click', deleteClass);
+            }
+            if ((arrOfRows[i].childNodes[j].classList.length == 1)&&(droppingClass.length > 0)){//&&(isBelow)){  //&&((if (i<meshSize - 1){arrOfRows[i + 1].childNodes[j].classList.length == 2}))){
+                arrOfRows[i].childNodes[j].addEventListener('click', function(){
+                    if (isBelow(i,j)){
+                        if ((droppingClass == "grass")&& (inventory.grass > 0)){
+                            arrOfRows[i].childNodes[j].classList.add(droppingClass);
+                            inventory.grass += -1;
+                            let grassInv = document.getElementById("grassInv");
+                            grassInv.innerHTML = inventory.grass;
+                            droppingClass = "";
+                        };
+                        if ((droppingClass == "dirt")&& (inventory.dirt > 0)){
+                            arrOfRows[i].childNodes[j].classList.add(droppingClass);
+                            inventory.dirt += -1;
+                            let dirtInv = document.getElementById("dirtInv");
+                            dirtInv.innerHTML = inventory.dirt;
+                            droppingClass = "";
+                        };
+                        if ((droppingClass == "stone")&& (inventory.stone > 0)){
+                            arrOfRows[i].childNodes[j].classList.add(droppingClass);
+                            inventory.stone += -1;
+                            let stoneInv = document.getElementById("stoneInv");
+                            stoneInv.innerHTML = inventory.stone;
+                            droppingClass = "";
+                        };
+                        if ((droppingClass == "bark")&& (inventory.bark > 0)){
+                            arrOfRows[i].childNodes[j].classList.add(droppingClass);
+                            inventory.bark += -1;
+                            let barkInv = document.getElementById("barkInv");
+                            barkInv.innerHTML = inventory.bark;
+                            droppingClass = "";
+                        };
+                        if ((droppingClass == "leaves")&& (inventory.leaves > 0)){
+                            arrOfRows[i].childNodes[j].classList.add(droppingClass);
+                            inventory.leaves += -1;
+                            let leavesInv = document.getElementById("leavesInv");
+                            leavesInv.innerHTML = inventory.leaves;
+                            droppingClass = "";
+                        };
+                    }
+                })
+            }
          }
     }
 };
 
 let currentlySelectedTool = "";
+let toolArray = document.getElementsByClassName("toolButton");
 
 function addingEventListenersToTools(){
     let isAToolSelected = false;
-    let toolArray = document.getElementById("sideBar").childNodes;
     for (let i=0; i<toolArray.length; i++){
         toolArray[i].addEventListener('click', function(el){
         if (!isAToolSelected){
@@ -330,5 +399,5 @@ function startGame() {
     addCloud(cloudStartX, cloudStartY);
     addingEventListenersToGame();
     addingEventListenersToTools();
-    invOpacity();
+    addInventoryEventListeners()
 }
