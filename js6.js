@@ -208,8 +208,10 @@ function addCloud(cloudStartX,cloudStartY){
 }
 
 const inventory = {
-    ground: 0,
-    tree: 0,
+    dirt: 0,
+    grass: 0,
+    leaves: 0,
+    bark: 0,
     stone: 0,
 }
 
@@ -235,16 +237,25 @@ function deleteClass(e){
         else {check += "(arrOfRows[targetRow].childNodes[targetCol + 1].classList.length == 1)"}
     };
     if (eval(check)){
-        if ((currentlySelectedTool == "shovel")&&((e.target.classList[1] == 'dirt')||(e.target.classList[1] == 'grass'))){
-            inventory.ground += 1;
+        if ((currentlySelectedTool == "shovel")&&(e.target.classList[1] == 'dirt')){
+            inventory.dirt += 1;
             e.target.classList = 'box';
         }
+        else if ((currentlySelectedTool == "shovel")&&(e.target.classList[1] == 'grass')){
+            inventory.grass += 1;
+            e.target.classList = 'box';
+        }
+
         else if ((currentlySelectedTool == "pickaxe")&&(e.target.classList[1] == 'stone')){
             inventory.stone += 1;
             e.target.classList = 'box';
         }
-        else if ((currentlySelectedTool == "axe")&&((e.target.classList[1] == 'bark')||(e.target.classList[1] == 'leaves'))){
-            inventory.tree += 1;
+        else if ((currentlySelectedTool == "axe")&&(e.target.classList[1] == 'bark')){
+            inventory.bark += 1;
+            e.target.classList = 'box';
+        }
+        else if ((currentlySelectedTool == "axe")&&(e.target.classList[1] == 'leaves')){
+            inventory.leaves += 1;
             e.target.classList = 'box';
         }
     }
@@ -270,6 +281,15 @@ function addingEventListenersToTools(){
             el.target.classList.add("selectedTool");
             isAToolSelected = true;
             }
+        else if ((isAToolSelected) && (el.target.classList.length == 1)){
+            for (let j=0;j<toolArray.length; j++){
+                if (toolArray[j].id == currentlySelectedTool) {
+                    toolArray[j].classList = "toolButton"
+                }
+            };
+            currentlySelectedTool = el.target.id;
+            el.target.classList.add("selectedTool");
+        }
         else if ((isAToolSelected) && (el.target.classList.length == 2)){
             currentlySelectedTool = "";
             el.target.classList = "toolButton";
